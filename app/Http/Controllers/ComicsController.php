@@ -71,7 +71,9 @@ class comicsController extends Controller
      */
     public function edit(Comic $comic)
     {
-        return view("comics.edit", compact("comic"));
+        $types = Comic::select('type')->distinct()->get()->all();
+        // dd($types);
+        return view("comics.edit", compact("comic","types"));
     }
 
     /**

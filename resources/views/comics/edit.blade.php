@@ -27,8 +27,12 @@
                 <label for="name">sale_date</label>
                 <input class="form-control" type="text" name="sale_date" value="{{$comic->sale_date}}">
 
-                <label for="name">type</label>
-                <input class="form-control" type="text" name="type" value="{{$comic->type}}">
+                <label for="inputType" class="form-label">Type</label>
+                    <select name="type" class="form-control" id="inputType">
+                        @foreach ($types as $type)
+                            <option @selected($comic->type == $type->type) value="{{ $type->type }}">{{ $type->type }}</option>
+                        @endforeach
+                    </select>
 
                 <input class="form-control mt-4 btn btn-primary" type="submit" value="Invia">
             </form>
@@ -47,6 +51,9 @@
             }
         }
     </script>
+    
+    
+    
 
 </div>
 @endsection
