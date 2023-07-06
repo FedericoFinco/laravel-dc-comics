@@ -37,6 +37,7 @@ class comicsController extends Controller
                 "description" => "min:5|max:65535",
                 "thumb" => "required|min:5|max:65535",
                 "price" => "required|max:50",
+                "series" => "",
                 "title"=>"required|min:5|max:50",
                 "sale_date"=>"required|date_format:Y-m-d",
                 "type"=>"required|min:5|max:50",
@@ -70,16 +71,22 @@ class comicsController extends Controller
         //     "type"=>"required|min:5|max:50",
         // ]);
         // $data = $request->all();
+        // except(["_token","_method"])
         $data = $this->comicValidation( $request->all() );
         
-        $newComic = new Comic;
-        $newComic->title = $data['title'];
-        $newComic->description = $data['description'];
-        $newComic->thumb = $data['thumb'];
-        $newComic->price = $data['price'];
-        $newComic->series = $data['series'];
-        $newComic->sale_date = $data['sale_date'];
-        $newComic->type = $data['type'];
+        
+
+        $newComic = new Comic();
+        foreach ($data as $key => $value) {
+            $newComic->$key = $value;
+        }
+        // $newComic->title = $data['title'];
+        // $newComic->description = $data['description'];
+        // $newComic->thumb = $data['thumb'];
+        // $newComic->price = $data['price'];
+        // $newComic->series = $data['series'];
+        // $newComic->sale_date = $data['sale_date'];
+        // $newComic->type = $data['type'];
         $newComic->save();
         
         return redirect()->route('comics.show', $newComic->id);
@@ -118,8 +125,17 @@ class comicsController extends Controller
      */
     public function update(Request $request, Comic $comic)
     {
-        $data = $request->all();
+        // $data = $request->all();
 
+        // newComic=[$data,"id"=$comic=>"id"]
+
+        $data = $this->comicValidation( $request->all() );
+
+
+        
+        foreach ($data as $key => $value) {
+            $comic->$key = $value;
+        }
         $comic->title = $data['title'];
         $comic->description = $data['description'];
         $comic->thumb = $data['thumb'];

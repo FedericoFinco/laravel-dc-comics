@@ -19,43 +19,43 @@
                 @method("PUT")
             
                 <label for="name">title</label>
-                <input class="form-contro @error('title') is-invalid @enderror" type="text" name="title" value="{{ old("title") ?? $comic->title}}">
-                @error
-                    <div class="invalid-feedback">{{message}}</div>
+                <input class="form-control @error('title') is-invalid @enderror" type="text" name="title" value="{{ old("title") ?? $comic->title}}">
+                @error("title")
+                    <div class="invalid-feedback">{{$message}}</div>
                 @enderror
 
                 <label for="name">description</label>
-                <input class="form-control @error('title') is-invalid @enderror" type="text" name="description" value="{{ old("description") ?? $comic->description}}">
-                @error
-                    <div class="invalid-feedback">{{message}}</div>
+                <input class="form-control @error('description') is-invalid @enderror" type="text" name="description" value="{{ old("description") ?? $comic->description}}">
+                @error("description")
+                    <div class="invalid-feedback">{{$message}}</div>
                 @enderror
 
                 <label for="name">thumb</label>
-                <input class="form-control @error('title') is-invalid @enderror" type="text" name="thumb" value="{{ old("thumb") ?? $comic->thumb}}">
-                @error
-                    <div class="invalid-feedback">{{message}}</div>
+                <input class="form-control @error('thumb') is-invalid @enderror" type="text" name="thumb" value="{{ old("thumb") ?? $comic->thumb}}">
+                @error("thumb")
+                    <div class="invalid-feedback">{{$message}}</div>
                 @enderror
 
                 <label for="name">price</label>
-                <input class="form-control @error('title') is-invalid @enderror" type="text" name="price" value="{{ old("price") ?? $comic->price}}">
-                @error
-                    <div class="invalid-feedback">{{message}}</div>
+                <input class="form-control @error('price') is-invalid @enderror" type="text" name="price" value="{{ old("price") ?? $comic->price}}">
+                @error("price")
+                    <div class="invalid-feedback">{{$message}}</div>
                 @enderror
 
                 <label for="name">series</label>
-                <input class="form-control @error('title') is-invalid @enderror" type="text" name="series" value="{{ old("series") ?? $comic->series}}">
-                @error
-                    <div class="invalid-feedback">{{message}}</div>
+                <input class="form-control @error('series') is-invalid @enderror" type="text" name="series" value="{{ old("series") ?? $comic->series}}">
+                @error("series")
+                    <div class="invalid-feedback">{{$message}}</div>
                 @enderror
 
                 <label for="name">sale_date</label>
-                <input class="form-control @error('title') is-invalid @enderror" type="text" name="sale_date" value="{{ old("sale_date") ?? $comic->sale_date}}">
-                @error
-                    <div class="invalid-feedback">{{message}}</div>
+                <input class="form-control @error('sale_date') is-invalid @enderror" type="text" name="sale_date" value="{{ old("sale_date") ?? $comic->sale_date}}">
+                @error("sale_date")
+                    <div class="invalid-feedback">{{$message}}</div>
                 @enderror
 
                 <label for="inputType" class="form-label">Type</label>
-                    <select name="type" class="form-control" id="inputType">
+                    <select name="type" class="form-control @error('sale_date') is-invalid @enderror" id="inputType">
                         @foreach ($types as $type)
                             <option @selected($comic->type == $type->type) value="{{ $type->type }}">{{ $type->type }}</option>
                         @endforeach
