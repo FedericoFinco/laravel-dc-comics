@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comic;
+use Illuminate\Support\Facades\Validator;
 
 class comicsController extends Controller
 {
@@ -29,6 +30,28 @@ class comicsController extends Controller
         return view("comics.create");
     }
 
+    
+    private function comicValidation($data){
+        $validator= Validator::make($data,[
+                "title"=>"required|min:5|max:50",
+                "description" => "min:5|max:65535",
+                "thumb" => "required|min:5|max:65535",
+                "price" => "required|max:50",
+                "title"=>"required|min:5|max:50",
+                "sale_date"=>"required|date_format:Y-m-d",
+                "type"=>"required|min:5|max:50",
+            ],[
+                "title.required" => "Il titolo è obbligatorio",
+                "title.min" => "Il titolo deve essere almeno di :min caratteri",
+                "description.min" => "la descrizione deve essere almeno di :min caratteri",
+                "thumb.required" => "la thumb purtroppo è necessaria. smasha la mano sulla tastiera e va bene",
+                "price.max" => "il prezzo è troppo lungo",
+                "sale_date.date_format" => "il formato della data deve essere yyyy-mm-gg"
+            ])->validate();
+
+            return $validator;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -37,7 +60,17 @@ class comicsController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        // $request->validate([
+        //     "title"=>"required|min:5|max:50",
+        //     "description" => "min:5|max:65535",
+        //     "thumb" => "required|min:5|max:65535",
+        //     "price" => "required|max:50",
+        //     "title"=>"required|min:5|max:50",
+        //     "sale_date"=>"required|date_format:Y-m-d",
+        //     "type"=>"required|min:5|max:50",
+        // ]);
+        // $data = $request->all();
+        $data = $this->comicValidation( $request->all() );
         
         $newComic = new Comic;
         $newComic->title = $data['title'];
